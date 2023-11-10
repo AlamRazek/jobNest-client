@@ -1,16 +1,17 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
   const location = useLocation();
+  const navigate = useNavigate();
+  const [errors, setError] = useState("");
 
   const notify1 = () => toast("Successfully Logged in");
   const notify2 = (err) => toast(err);
-
-  const navigate = useNavigate();
 
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -27,18 +28,28 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const form = new FormData(e.currentTarget);
-    const email = form.get("email");
-    const password = form.get("password");
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
     signIn(email, password)
-      .then((res) => {
-        console.log(res);
+      .then((result) => {
+        const loggedInUser = result?.user;
+        console.log(loggedInUser);
+        const user = { email };
 
-        navigate(location?.state ? location.state : "/");
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.success) {
+              navigate(location?.state ? location.state : "/");
+            }
+          });
       })
       .catch((error) => {
         console.log(error.message);
+        setError(error.message);
       });
   };
 
@@ -93,6 +104,7 @@ const Login = () => {
           Google login
         </button>
       </div>
+      <div>{errors && <span className="text-red-700">{errors}</span>}</div>
       <p className="text-center pb-3 px-3 md:pb-6 md:px-6">
         Do not have an account? please{" "}
         <Link className="font-bold text-blue-800 underline" to={"/register"}>

@@ -43,11 +43,11 @@ const AuthProvider = ({ children }) => {
     return userCredentials.user;
   };
 
-  const signIn = (email, password) => {
+  const signIn = async (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password)
+    return await signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        console.log(res);
+        console.log(res.user);
       })
       .catch((err) => {
         console.log(err);

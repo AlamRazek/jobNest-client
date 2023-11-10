@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddJob = () => {
   const { user } = useContext(AuthContext);
@@ -15,8 +17,8 @@ const AddJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const bannerUrl = form.bannerUrl.value;
     const jobTitle = form.jobTitle.value;
+    const bannerUrl = form.bannerUrl.value;
     const name = form.name.value;
     const radio = form.radio.value;
     const salary = form.salary.value;
@@ -25,6 +27,7 @@ const AddJob = () => {
     const applicantNumber = form.applicantNumber.value;
 
     const addedJob = {
+      jobTitle,
       bannerUrl,
       name,
       radio,
@@ -33,6 +36,29 @@ const AddJob = () => {
       deadline,
       applicantNumber,
     };
+
+    console.log(addedJob);
+
+    axios
+      .post("http://localhost:5000/job", addedJob, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "success!",
+            text: "Product Added",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
