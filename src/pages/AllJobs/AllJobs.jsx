@@ -5,6 +5,7 @@ import Jobs from "./jobs";
 
 const AllJobs = () => {
   const [data, setData] = useState();
+  const [query, setQuery] = useState();
 
   useEffect(() => {
     axios
@@ -18,14 +19,28 @@ const AllJobs = () => {
       });
   }, []);
 
+  console.log(
+    data?.filter((title) => title.jobTitle.toLowerCase().includes(query))
+  );
+
   return (
     <div>
       <Helmet>
         <title>All Jobs</title>
       </Helmet>
-      {data?.map((jobs) => (
-        <Jobs key={jobs._id} jobs={jobs}></Jobs>
-      ))}
+      <div className="join my:4 lg:my-10 ">
+        <input
+          className="input input-bordered join-item"
+          placeholder="Search"
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="btn join-item rounded-r-full">Search</button>
+      </div>
+      {data
+        ?.filter((title) => title.jobTitle.toLowerCase().includes(query))
+        .map((jobs) => (
+          <Jobs key={jobs._id} jobs={jobs}></Jobs>
+        ))}
     </div>
   );
 };

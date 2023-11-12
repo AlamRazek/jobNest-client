@@ -5,16 +5,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 const Jobs = ({ jobs }) => {
   const { user } = useContext(AuthContext);
-  const {
-    deadline,
-
-    name,
-
-    salary,
-    jobTitle,
-    postingDate,
-    _id,
-  } = jobs;
+  const { deadline, name, salary, jobTitle, postingDate, _id } = jobs;
 
   const handleButton = () => {
     const notify = () => toast("Please LogIn");
@@ -25,8 +16,8 @@ const Jobs = ({ jobs }) => {
   };
 
   return (
-    <div className="overflow-x-auto p-2">
-      <table className="table">
+    <div className="overflow-x-auto p-2 flex">
+      <table className="table flex">
         {/* head */}
         <thead>
           <tr>
@@ -59,7 +50,7 @@ const Jobs = ({ jobs }) => {
               <Link to={`details/${_id}`}>
                 <button
                   onClick={handleButton}
-                  className="btn bg-purple-600 text-white btn-xs font-bold px-4 pb-5 pt-2 hover:bg-purple-800"
+                  className="btn btn-outline   text-black  font-bold  hover:bg-purple-800"
                 >
                   See details
                 </button>
