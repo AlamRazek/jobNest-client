@@ -4,8 +4,8 @@ import { Helmet } from "react-helmet";
 import Jobs from "./jobs";
 
 const AllJobs = () => {
-  const [data, setData] = useState();
-  const [query, setQuery] = useState();
+  const [data, setData] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     axios
@@ -19,6 +19,14 @@ const AllJobs = () => {
       });
   }, []);
 
+  const handleSearch = () => {
+    const searchData = data?.filter((title) =>
+      title.jobTitle.toLowerCase().includes(query)
+    );
+    setData(searchData);
+  };
+
+  console.log(query);
   console.log(
     data?.filter((title) => title.jobTitle.toLowerCase().includes(query))
   );
@@ -34,13 +42,15 @@ const AllJobs = () => {
           placeholder="Search"
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button className="btn join-item rounded-r-full">Search</button>
+        <button className="btn join-item rounded-r-full" onClick={handleSearch}>
+          Search
+        </button>
       </div>
-      {data
-        ?.filter((title) => title.jobTitle.toLowerCase().includes(query))
-        .map((jobs) => (
-          <Jobs key={jobs._id} jobs={jobs}></Jobs>
-        ))}
+      {data.length > 0
+        ? data
+            ?.filter((title) => title.jobTitle.toLowerCase().includes(query))
+            .map((jobs) => <Jobs key={jobs._id} jobs={jobs}></Jobs>)
+        : data?.map((jobs) => <Jobs key={jobs._id} jobs={jobs}></Jobs>)}
     </div>
   );
 };
