@@ -1,30 +1,73 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { AuthContext } from "../../Provider/AuthProvider";
+
 const Jobs = ({ jobs }) => {
+  const { user } = useContext(AuthContext);
   const {
-    applicantNumber,
-    bannerUrl,
     deadline,
-    jobDetails,
+
     name,
-    radio,
+
     salary,
+    jobTitle,
+    postingDate,
+    _id,
   } = jobs;
 
+  const handleButton = () => {
+    const notify = () => toast("Please LogIn");
+
+    if (!user) {
+      notify();
+    }
+  };
+
   return (
-    <div className="card card-side bg-base-100 shadow-xl">
-      <figure>
-        <img
-          src={bannerUrl}
-          alt="Movie"
-          className="max-h-48 p-3  lg:p-7 mx-10"
-        />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">New movie is released!</h2>
-        <p>{}</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">View Details</button>
-        </div>
-      </div>
+    <div className="overflow-x-auto p-2">
+      <table className="table">
+        {/* head */}
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Job Title</th>
+            <th>Job Posting Date</th>
+            <th>Application Deadline</th>
+            <th>Salary range</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* row 1 */}
+          <tr>
+            <td>
+              <div className="flex items-center space-x-3">
+                <div>
+                  <div className="font-bold">{name}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <br />
+              <p className="">{jobTitle}</p>
+            </td>
+            <td>{postingDate}</td>
+            <td>{deadline}</td>
+            <td>{salary}</td>
+            <th>
+              <Link to={`details/${_id}`}>
+                <button
+                  onClick={handleButton}
+                  className="btn bg-purple-600 text-white btn-xs font-bold px-4 pb-5 pt-2 hover:bg-purple-800"
+                >
+                  See details
+                </button>
+              </Link>
+            </th>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

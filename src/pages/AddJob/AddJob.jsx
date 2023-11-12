@@ -2,9 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Helmet } from "react-helmet";
 import axios from "axios";
-import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 const AddJob = () => {
+  const notify = () => toast("Job Posted");
+
   const { user } = useContext(AuthContext);
   const [crntDate, setCrntDate] = useState("");
 
@@ -23,6 +27,7 @@ const AddJob = () => {
     const radio = form.radio.value;
     const salary = form.salary.value;
     const jobDetails = form.jobDetails.value;
+    const postingDate = form.postingDate.value;
     const deadline = form.deadline.value;
     const applicantNumber = form.applicantNumber.value;
 
@@ -35,6 +40,7 @@ const AddJob = () => {
       jobDetails,
       deadline,
       applicantNumber,
+      postingDate,
     };
 
     console.log(addedJob);
@@ -46,19 +52,12 @@ const AddJob = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
-        if (res.data.insertedId) {
-          Swal.fire({
-            title: "success!",
-            text: "Product Added",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
+        console.log(res?.data);
+        if (res?.insertedId) {
+          notify();
         }
-      })
-      .catch((err) => {
-        console.log(err);
       });
+    document.getElementById("reset").reset();
   };
 
   return (
@@ -76,6 +75,7 @@ const AddJob = () => {
         className="card-body md:w-3/4 lg:w-1/2 mx-auto"
         data-aos="fade-up"
         onSubmit={handleSubmit}
+        id="reset"
       >
         <div className="form-control">
           <label className="label">

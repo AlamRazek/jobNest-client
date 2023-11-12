@@ -1,15 +1,19 @@
 import React from "react";
 import Banner from "./Banner";
 import { Helmet } from "react-helmet";
+import JobsTable from "./JobsTable";
+import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   return (
-    <div className="h-[100vh]">
+    <div>
       <Helmet>
         <title>Home </title>
       </Helmet>
       <Banner></Banner>
-      <h2>This is home</h2>
+      <div>
+        <JobsTable></JobsTable>
+      </div>
     </div>
   );
 };
