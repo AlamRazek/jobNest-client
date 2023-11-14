@@ -29,7 +29,7 @@ const AddJob = () => {
     const jobDetails = form.jobDetails.value;
     const postingDate = form.postingDate.value;
     const deadline = form.deadline.value;
-    const applicantNumber = form.applicantNumber.value;
+    const applicantNumber = parseInt(form.applicantNumber.value);
 
     const addedJob = {
       jobTitle,

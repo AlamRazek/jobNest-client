@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const JobDetails = () => {
   const { user } = useContext(AuthContext);
@@ -21,7 +23,64 @@ const JobDetails = () => {
     salary,
     applicantNumber,
     postingDate,
+    _id,
   } = JobDetail;
+
+  const handleSubmit = (e) => {
+    const notify = () => toast("Applied Successfully");
+    e.preventDefault();
+    const form = e.target;
+    const applierName = form.name.value;
+    const applierEmail = form.email.value;
+    const applierResume = form.resume.value;
+
+    const appliedJobs = {
+      applierName,
+      applierEmail,
+      applierResume,
+      bannerUrl,
+      jobDetails,
+      jobTitle,
+      name,
+      salary,
+      applicantNumber,
+      postingDate,
+    };
+    console.log(appliedJobs);
+
+    axios
+      .post("http://localhost:5000/appliedJobs", appliedJobs, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res?.data);
+        if (res?.data.insertedId) {
+          notify();
+        }
+      });
+  };
+
+  const handleApplicant = (id) => {
+    axios
+      .patch(
+        `http://localhost:5000/appliedJobs/${id}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log("successful:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error post:", error);
+      });
+    console.log("success fully added");
+  };
 
   return (
     <div className="card card-compact max-w-[880px] max-h-[650px]  mx-auto my-6 lg:my-16">
@@ -71,13 +130,20 @@ const JobDetails = () => {
               ✕
             </button>
           </form>
-          <form className="card-body">
+          <form
+            className="card-body"
+            onSubmit={(e) => {
+              handleApplicant(_id);
+              e.preventDefault();
+            }}
+          >
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
               <input
                 type="text"
+                name="name"
                 placeholder="Name"
                 className="input input-bordered"
                 value={user.displayName}
@@ -91,6 +157,7 @@ const JobDetails = () => {
               <input
                 type="email"
                 placeholder="email"
+                name="email"
                 className="input input-bordered"
                 value={user.email}
                 required
@@ -103,6 +170,7 @@ const JobDetails = () => {
               </label>
               <input
                 type="text"
+                name="resume"
                 placeholder="submit resume link"
                 className="input input-bordered"
                 required

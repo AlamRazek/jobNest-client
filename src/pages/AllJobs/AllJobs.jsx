@@ -8,15 +8,13 @@ const AllJobs = () => {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/Jobs")
-      .then((res) => {
-        console.log(res.data);
-        setData(res.data);
-      })
-      .then((err) => {
+    axios.get("http://localhost:5000/Jobs").then((res) => {
+      console.log(res.data);
+      setData(res.data);
+    });
+    /* .then((err) => {
         console.log(err);
-      });
+      }); */
   }, []);
 
   const handleSearch = () => {
@@ -26,10 +24,10 @@ const AllJobs = () => {
     setData(searchData);
   };
 
-  console.log(query);
+  /*   console.log(query);
   console.log(
     data?.filter((title) => title.jobTitle.toLowerCase().includes(query))
-  );
+  ); */
 
   return (
     <div>
@@ -46,9 +44,9 @@ const AllJobs = () => {
           Search
         </button>
       </div>
-      {data.length > 0
+      {data && data.length > 0
         ? data
-            ?.filter((title) => title.jobTitle.toLowerCase().includes(query))
+            ?.filter((title) => title?.jobTitle?.toLowerCase().includes(query))
             .map((jobs) => <Jobs key={jobs._id} jobs={jobs}></Jobs>)
         : data?.map((jobs) => <Jobs key={jobs._id} jobs={jobs}></Jobs>)}
     </div>
