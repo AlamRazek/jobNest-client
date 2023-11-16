@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const Error = () => {
   return (
     <div>
-      <section className="relative z-10 bg-primary py-[120px]">
+      <section className="relative z-10 bg-primary py-[120px] h-[100vh]">
         <div className="container mx-auto">
           <div className="-mx-4 flex">
             <div className="w-full px-4">

@@ -52,9 +52,15 @@ const JobsTable = () => {
   };
 
   return (
-    <div>
+    <div className="my-4 lg:my-10">
       <Tabs onSelect={handleTab}>
-        <TabList>
+        <TabList
+          style={{
+            backgroundColor: "#f0f0f0",
+            padding: "10px",
+            borderBottom: "1px solid #ccc",
+          }}
+        >
           <Tab>All</Tab>
           <Tab>On Site job</Tab>
           <Tab>Remote Job</Tab>

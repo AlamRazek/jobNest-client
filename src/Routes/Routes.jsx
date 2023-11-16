@@ -10,6 +10,8 @@ import PrivateRoute from "./PrivateRoute";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import JobDetails from "../pages/JobDetails/JobDetails";
+import UpdateJobs from "../pages/UpdateJobs.jsx/UpdateJobs";
+import DeleteJob from "../pages/MyJobs/DeleteJob";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +44,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/appliedjobs",
+        path: "/appliedjobs/:name",
         element: (
           <PrivateRoute>
             <MyJobs></MyJobs>
@@ -69,7 +71,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/details/${params.id}`),
+          await fetch(`http://localhost:5000/details/${params.id}`),
       },
       {
         path: "/alljobs/details/:id",
@@ -79,17 +81,27 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/details/${params.id}`),
+          await fetch(`http://localhost:5000/details/${params.id}`),
       },
       {
-        path: "/details/:id",
+        path: "/update/:id",
         element: (
           <PrivateRoute>
-            <JobDetails></JobDetails>
+            <UpdateJobs></UpdateJobs>
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/details/${params.id}`),
+          await fetch(`http://localhost:5000/details/${params.id}`),
+      },
+      {
+        path: "/delete/:id",
+        element: (
+          <PrivateRoute>
+            <DeleteJob></DeleteJob>
+          </PrivateRoute>
+        ),
+        loader: async ({ params }) =>
+          await fetch(`http://localhost:5000/details/${params.id}`),
       },
     ],
   },
