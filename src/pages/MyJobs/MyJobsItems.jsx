@@ -31,8 +31,8 @@ const MyJobsItems = ({ job, jobs, setjobs }) => {
           .then((res) => {
             console.log(res?.data);
             if (res?.data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Cart been deleted.", "success");
-              const remaining = jobs.filter((crt) => crt._id !== _id);
+              Swal.fire("Deleted!", "job has been deleted.", "success");
+              const remaining = jobs.filter((job) => job._id !== _id);
               setjobs(remaining);
             }
           })
@@ -86,7 +86,7 @@ const MyJobsItems = ({ job, jobs, setjobs }) => {
                   <button className="btn btn-xs">Update</button>
                 </Link>
                 <button
-                  className="btn btn-xs"
+                  className="btn btn-xs ml-4"
                   onClick={() => ConfirmDelete(_id)}
                 >
                   Delete

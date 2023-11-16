@@ -5,20 +5,27 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 const MyJobs = () => {
   const { user } = useContext(AuthContext);
-  const [jobs, setjobs] = useState();
+  const [jobs, setjobs] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/jobs/${user.displayName}`).then((res) => {
       console.log(res.data);
       setjobs(res?.data);
-    });
+    }, []);
   }, [user.displayName]);
 
   return (
     <div>
-      <h2>This is my jobs page</h2>
+      <h2 className="my-4 lg:my-8 font-semibold text-center underline">
+        My Applied Jobs
+      </h2>
       {jobs?.map((job) => (
-        <MyJobsItems key={job._id} job={job} jobs setjobs></MyJobsItems>
+        <MyJobsItems
+          key={job._id}
+          job={job}
+          jobs={jobs}
+          setjobs={setjobs}
+        ></MyJobsItems>
       ))}
     </div>
   );
