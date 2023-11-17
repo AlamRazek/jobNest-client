@@ -11,6 +11,7 @@ import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import JobDetails from "../pages/JobDetails/JobDetails";
 import UpdateJobs from "../pages/UpdateJobs.jsx/UpdateJobs";
+import AppliedJobs from "../pages/AppliedJobs/AppliedJobs";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,14 @@ const router = createBrowserRouter([
         ),
         loader: async ({ params }) =>
           await fetch(`http://localhost:5000/details/${params.id}`),
+      },
+      {
+        path: "/appliedJobs",
+        element: (
+          <PrivateRoute>
+            <AppliedJobs></AppliedJobs>
+          </PrivateRoute>
+        ),
       },
     ],
   },

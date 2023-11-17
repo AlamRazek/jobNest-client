@@ -24,11 +24,12 @@ const JobDetails = () => {
     applicantNumber,
     postingDate,
     _id,
+    radio,
   } = JobDetail;
 
-  const handleSubmit = (e) => {
-    const notify = () => toast("Applied Successfully");
+  const handleApplicationSubmit = (e) => {
     e.preventDefault();
+    const notify = () => toast("Applied Successfully");
     const form = e.target;
     const applierName = form.name.value;
     const applierEmail = form.email.value;
@@ -45,6 +46,7 @@ const JobDetails = () => {
       salary,
       applicantNumber,
       postingDate,
+      radio,
     };
     console.log(appliedJobs);
 
@@ -62,10 +64,16 @@ const JobDetails = () => {
       });
   };
 
-  const handleApplicant = (id) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleApplicantNumber(_id);
+    handleApplicationSubmit(e);
+  };
+
+  const handleApplicantNumber = (_id) => {
     axios
       .patch(
-        `http://localhost:5000/appliedJobs/${id}`,
+        `http://localhost:5000/updateAppliedJobs/${_id}`,
         {},
         {
           headers: {
@@ -130,13 +138,7 @@ const JobDetails = () => {
               ✕
             </button>
           </form>
-          <form
-            className="card-body"
-            onSubmit={(e) => {
-              handleApplicant(_id);
-              e.preventDefault();
-            }}
-          >
+          <form className="card-body" onSubmit={handleSubmit}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>

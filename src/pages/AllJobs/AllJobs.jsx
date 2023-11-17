@@ -34,6 +34,7 @@ const AllJobs = () => {
       <Helmet>
         <title>All Jobs</title>
       </Helmet>
+      <div>Total Jobs: {data.length}</div>
       <div className="join my:4 lg:my-10 ">
         <input
           className="input input-bordered join-item"

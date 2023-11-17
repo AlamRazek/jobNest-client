@@ -1,4 +1,3 @@
-import React from "react";
 import Banner from "./Banner";
 import { Helmet } from "react-helmet";
 import JobsTable from "./JobsTable";

@@ -17,7 +17,7 @@ const MyJobs = () => {
   return (
     <div>
       <h2 className="my-4 lg:my-8 font-semibold text-center underline">
-        My Applied Jobs
+        My Posted Jobs
       </h2>
       {jobs?.map((job) => (
         <MyJobsItems
