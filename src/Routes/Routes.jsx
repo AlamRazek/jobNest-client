@@ -72,7 +72,7 @@ const router = createBrowserRouter([
         ),
         loader: async ({ params }) =>
           await fetch(
-            `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/details/${params.id}`
+            `https://jobnest-server-ten.vercel.app/details/${params.id}`
           ),
       },
       {
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
         ),
         loader: async ({ params }) =>
           await fetch(
-            `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/details/${params.id}`
+            `https://jobnest-server-ten.vercel.app/details/${params.id}`
           ),
       },
       {
@@ -96,7 +96,7 @@ const router = createBrowserRouter([
         ),
         loader: async ({ params }) =>
           await fetch(
-            `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/details/${params.id}`
+            `https://jobnest-server-ten.vercel.app/details/${params.id}`
           ),
       },
       {

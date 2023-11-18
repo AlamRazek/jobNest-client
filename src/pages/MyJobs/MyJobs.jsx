@@ -9,9 +9,7 @@ const MyJobs = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/jobs/${user.displayName}`
-      )
+      .get(`https://jobnest-server-ten.vercel.app/jobs/${user.displayName}`)
       .then((res) => {
         console.log(res.data);
         setjobs(res?.data);

@@ -58,15 +58,11 @@ const UpdateJobs = () => {
     };
 
     axios
-      .put(
-        `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/update/${_id}`,
-        addedJob,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .put(`https://jobnest-server-ten.vercel.app/update/${_id}`, addedJob, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
         console.log(res?.data);
         if (res?.data?.modifiedCount) {

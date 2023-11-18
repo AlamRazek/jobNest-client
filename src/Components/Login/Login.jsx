@@ -39,11 +39,9 @@ const Login = () => {
         const user = { email };
 
         axios
-          .post(
-            "https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/jwt",
-            user,
-            { withCredentials: true }
-          )
+          .post("https://jobnest-server-ten.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log(res.data);
             if (res.data.success) {
@@ -108,7 +106,7 @@ const Login = () => {
           Google login
         </button>
       </div>
-      <div>{errors && <span className="text-red-700">{errors}</span>}</div>
+      <div>{errors ? <span className="text-red-700">{errors}</span> : ""}</div>
       <p className="text-center pb-3 px-3 md:pb-6 md:px-6">
         Do not have an account? please{" "}
         <Link className="font-bold text-blue-800 underline" to={"/register"}>

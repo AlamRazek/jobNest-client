@@ -46,15 +46,11 @@ const AddJob = () => {
     console.log(addedJob);
 
     axios
-      .post(
-        "https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/job",
-        addedJob,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .post("https://jobnest-server-ten.vercel.app/job", addedJob, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
         console.log(res?.data);
         if (res?.insertedId) {

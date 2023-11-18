@@ -6,13 +6,15 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
+// .get("https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/jobs")
+
 const JobsTable = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState();
   useEffect(() => {
     axios
-      .get("https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/jobs")
+      .get("https://jobnest-server-ten.vercel.app/jobs")
       .then((res) => {
         setData(res?.data);
         setFilterData(res?.data);
