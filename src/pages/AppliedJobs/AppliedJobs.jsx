@@ -11,7 +11,9 @@ const AppliedJobs = () => {
 
   useState(() => {
     axios
-      .get(`http://localhost:5000/appliedJobs/${user.displayName}`)
+      .get(
+        `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/appliedJobs/${user.displayName}`
+      )
       .then((res) => {
         console.log(res.data);
         setData(res.data);

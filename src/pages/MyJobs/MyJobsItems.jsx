@@ -27,7 +27,9 @@ const MyJobsItems = ({ job, jobs, setjobs }) => {
     }).then((result) => {
       if (result?.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/delete/${_id}`)
+          .delete(
+            `https://jobnest-server-j4r1pksyo-razeks-projects.vercel.app/delete/${_id}`
+          )
           .then((res) => {
             console.log(res?.data);
             if (res?.data.deletedCount > 0) {

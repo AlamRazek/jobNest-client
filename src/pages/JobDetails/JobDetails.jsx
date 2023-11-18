@@ -51,11 +51,15 @@ const JobDetails = () => {
     console.log(appliedJobs);
 
     axios
-      .post("http://localhost:5000/appliedJobs", appliedJobs, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        "https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/appliedJobs",
+        appliedJobs,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         console.log(res?.data);
         if (res?.data.insertedId) {
@@ -73,7 +77,7 @@ const JobDetails = () => {
   const handleApplicantNumber = (_id) => {
     axios
       .patch(
-        `http://localhost:5000/updateAppliedJobs/${_id}`,
+        `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/updateAppliedJobs/${_id}`,
         {},
         {
           headers: {

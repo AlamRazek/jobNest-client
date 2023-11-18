@@ -71,7 +71,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          await fetch(`http://localhost:5000/details/${params.id}`),
+          await fetch(
+            `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/details/${params.id}`
+          ),
       },
       {
         path: "/alljobs/details/:id",
@@ -81,7 +83,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          await fetch(`http://localhost:5000/details/${params.id}`),
+          await fetch(
+            `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/details/${params.id}`
+          ),
       },
       {
         path: "/update/:id",
@@ -91,7 +95,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          await fetch(`http://localhost:5000/details/${params.id}`),
+          await fetch(
+            `https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/details/${params.id}`
+          ),
       },
       {
         path: "/appliedJobs",

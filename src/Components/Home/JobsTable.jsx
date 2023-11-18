@@ -12,7 +12,7 @@ const JobsTable = () => {
   const [filterData, setFilterData] = useState();
   useEffect(() => {
     axios
-      .get("http://localhost:5000/jobs")
+      .get("https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/jobs")
       .then((res) => {
         setData(res?.data);
         setFilterData(res?.data);

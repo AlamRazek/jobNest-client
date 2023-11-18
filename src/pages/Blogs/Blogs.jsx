@@ -72,7 +72,12 @@ const Blogs = () => {
           My Code explanation:
         </div>
         <div className="collapse-content">
-          <p>hello</p>
+          <p>
+            In this site one can add a job,post a job abd update or delete a
+            post.the login is secured with jwt.user datas also loading
+            dynamically according to logged in user.user can see their post and
+            applied jobs.
+          </p>
         </div>
       </div>
     </div>

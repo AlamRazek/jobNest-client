@@ -8,10 +8,12 @@ const AllJobs = () => {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/Jobs").then((res) => {
-      console.log(res.data);
-      setData(res.data);
-    });
+    axios
+      .get("https://jobnest-server-249tiz2yb-razeks-projects.vercel.app/Jobs")
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data);
+      });
     /* .then((err) => {
         console.log(err);
       }); */
